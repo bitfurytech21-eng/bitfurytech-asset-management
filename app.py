@@ -95,7 +95,9 @@ def create_app():
             </div>
           </body>
         </html>
-        ''', name=user['name'])
+        ''', name=user['name'] 
+  
+)
 
     @app.route('/profile')
     def profile():
