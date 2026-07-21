@@ -1,3 +1,4 @@
+import TransactionTable from "../components/TransactionTable";
 import { useEffect, useState } from "react";
 
 interface Transaction {
