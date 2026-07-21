@@ -1,3 +1,4 @@
+import "./RecentTransactions.css";
 interface Transaction {
   id: number;
   type: string;
