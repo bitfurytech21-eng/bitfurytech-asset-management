@@ -1,3 +1,4 @@
+import Notifications from "../components/Notifications";
 import QuickActions from "../components/QuickActions";
 import InvestmentCard from "../components/InvestmentCard";
 import RecentTransactions from "../components/RecentTransactions";
@@ -106,6 +107,7 @@ return(
   status="Running"
 />
 <QuickActions />
+<Notifications />
 </main>
 </div>
 );
