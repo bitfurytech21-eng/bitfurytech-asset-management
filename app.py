@@ -249,6 +249,7 @@ def create_app():
           </body>
         </html>
         ''')
+        
     @app.route("/api/profile", methods=["GET"])
 def api_profile():
 
@@ -271,6 +272,7 @@ def api_profile():
         "status": "Verified",
         "kyc": "Completed"
     })
+    
     @app.route("/api/transactions", methods=["GET"])
 def api_transactions():
 
@@ -300,6 +302,7 @@ def api_transactions():
             "date": "2026-07-18"
         }
     ])
+    
     @app.route("/api/investments", methods=["GET"])
 def api_investments():
 
@@ -332,6 +335,7 @@ def api_investments():
             "status": "Running"
         }
     ])
+    
     @app.route("/api/notifications", methods=["GET"])
 def api_notifications():
 
