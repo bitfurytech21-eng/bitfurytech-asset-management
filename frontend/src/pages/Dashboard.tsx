@@ -1,3 +1,4 @@
+import QuickActions from "../components/QuickActions";
 import InvestmentCard from "../components/InvestmentCard";
 import RecentTransactions from "../components/RecentTransactions";
 import PortfolioChart from "../components/PortfolioChart";
@@ -104,6 +105,7 @@ return(
   roi="7.4%"
   status="Running"
 />
+<QuickActions />
 </main>
 </div>
 );
