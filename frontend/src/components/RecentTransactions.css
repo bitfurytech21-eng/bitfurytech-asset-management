@@ -1,0 +1,26 @@
+.transactions-card {
+  background: #101b2f;
+  color: white;
+  padding: 20px;
+  border-radius: 18px;
+  margin-top: 30px;
+}
+
+.transactions-card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transactions-card th,
+.transactions-card td {
+  padding: 12px;
+  text-align: left;
+}
+
+.transactions-card th {
+  color: #f2c94c;
+}
+
+.transactions-card tr {
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
