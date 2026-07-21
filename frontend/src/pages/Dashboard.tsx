@@ -71,6 +71,7 @@ return(
 />
 </div>
  <PortfolioChart portfolio={data.portfolio} />
+  <import RecentTransactions/>
 </main>
 </div>
 );
