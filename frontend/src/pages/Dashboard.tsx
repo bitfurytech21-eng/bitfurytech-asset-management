@@ -1,3 +1,4 @@
+import PortfolioChart from "../components/PortfolioChart";
 import { useEffect, useState } from "react";
 import "../components/Dashboard.css";
 import WelcomeCard from "../components/WelcomeCard";
