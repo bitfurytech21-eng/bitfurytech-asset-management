@@ -69,6 +69,7 @@ return(
   value={`+$${data.profit.toLocaleString()}`}
 />
 </div>
+ <PortfolioChart portfolio={data.portfolio} />
 </main>
 </div>
 );
