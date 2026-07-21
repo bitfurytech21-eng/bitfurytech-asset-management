@@ -249,14 +249,115 @@ def create_app():
           </body>
         </html>
         ''')
+    @app.route("/api/profile", methods=["GET"])
+def api_profile():
 
+    if "user" not in session:
+        return jsonify({
+            "success": False,
+            "message": "Unauthorized"
+        }), 401
+
+    user = session["user"]
+
+    return jsonify({
+        "success": True,
+        "name": user["name"],
+        "email": user["email"],
+        "role": user["role"],
+        "phone": "+1 000 000 0000",
+        "country": "Australia",
+        "photo": "/images/default-avatar.png",
+        "status": "Verified",
+        "kyc": "Completed"
+    })
+    @app.route("/api/transactions", methods=["GET"])
+def api_transactions():
+
+    if "user" not in session:
+        return jsonify([]), 401
+
+    return jsonify([
+        {
+            "id": 1,
+            "type": "Deposit",
+            "amount": 5000,
+            "status": "Completed",
+            "date": "2026-07-20"
+        },
+        {
+            "id": 2,
+            "type": "Investment",
+            "amount": 2500,
+            "status": "Running",
+            "date": "2026-07-19"
+        },
+        {
+            "id": 3,
+            "type": "Withdrawal",
+            "amount": 1000,
+            "status": "Pending",
+            "date": "2026-07-18"
+        }
+    ])
+    @app.route("/api/investments", methods=["GET"])
+def api_investments():
+
+    if "user" not in session:
+        return jsonify([]), 401
+
+    return jsonify([
+        {
+            "title": "Real Estate",
+            "amount": 10000,
+            "roi": "12.4%",
+            "status": "Running"
+        },
+        {
+            "title": "Agriculture",
+            "amount": 6500,
+            "roi": "8.2%",
+            "status": "Running"
+        },
+        {
+            "title": "Cryptocurrency",
+            "amount": 4200,
+            "roi": "15.8%",
+            "status": "Running"
+        },
+        {
+            "title": "Stocks",
+            "amount": 3100,
+            "roi": "7.4%",
+            "status": "Running"
+        }
+    ])
+    @app.route("/api/notifications", methods=["GET"])
+def api_notifications():
+
+    if "user" not in session:
+        return jsonify([]), 401
+
+    return jsonify([
+        {
+            "title": "Deposit Confirmed",
+            "message": "Your deposit has been confirmed."
+        },
+        {
+            "title": "Daily ROI",
+            "message": "Today's earnings have been credited."
+        },
+        {
+            "title": "Security",
+            "message": "Your account is protected."
+        }
+    ])
     @app.route('/logout')
     def logout():
         session.pop('user', None)
         return redirect(url_for('home'))
-
+        
     return app
-
 
 app = create_app()
 
