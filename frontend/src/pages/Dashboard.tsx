@@ -1,3 +1,4 @@
+import RecentTransactions from "../components/RecentTransactions";
 import PortfolioChart from "../components/PortfolioChart";
 import { useEffect, useState } from "react";
 import "../components/Dashboard.css";
