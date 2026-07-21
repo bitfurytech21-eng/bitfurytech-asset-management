@@ -1,3 +1,4 @@
+import ProfileCard from "../components/ProfileCard";
 import Notifications from "../components/Notifications";
 import QuickActions from "../components/QuickActions";
 import InvestmentCard from "../components/InvestmentCard";
@@ -108,6 +109,12 @@ return(
 />
 <QuickActions />
 <Notifications />
+<ProfileCard
+    name={data.name}
+    email={data.email}
+    role={data.role}
+    photo={data.photo}
+/>
 </main>
 </div>
 );
