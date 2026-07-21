@@ -1,0 +1,39 @@
+.profile-card{
+    background:#101B2F;
+    border-radius:20px;
+    padding:25px;
+    color:white;
+    text-align:center;
+    margin-top:30px;
+}
+
+.profile-photo{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    border:4px solid #F2C94C;
+    object-fit:cover;
+}
+
+.profile-card h2{
+    margin-top:15px;
+}
+
+.badge{
+    display:inline-block;
+    background:#F2C94C;
+    color:#07111F;
+    padding:8px 15px;
+    border-radius:20px;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.profile-info{
+    text-align:left;
+    margin-top:20px;
+}
+
+.profile-info p{
+    margin:12px 0;
+}
