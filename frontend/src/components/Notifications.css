@@ -1,0 +1,21 @@
+.notifications{
+    margin-top:30px;
+}
+
+.notifications h2{
+    color:#F2C94C;
+    margin-bottom:15px;
+}
+
+.notification-card{
+    background:#101B2F;
+    color:white;
+    padding:18px;
+    border-radius:15px;
+    margin-bottom:15px;
+    border-left:4px solid #F2C94C;
+}
+
+.notification-card h4{
+    margin-bottom:8px;
+}
