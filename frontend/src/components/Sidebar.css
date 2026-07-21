@@ -1,0 +1,27 @@
+@media(max-width:768px){
+
+.sidebar{
+
+width:100%;
+
+min-height:auto;
+
+padding:15px;
+
+}
+
+.sidebar nav{
+
+flex-direction:row;
+
+overflow-x:auto;
+
+}
+
+.sidebar a{
+
+white-space:nowrap;
+
+}
+
+}

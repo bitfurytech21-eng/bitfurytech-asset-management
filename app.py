@@ -1,9 +1,10 @@
-from flask import Flask, render_template_string, request, redirect, url_for, session
-
+from flask import Flask, render_template_string, request, redirect, url_for, session, jsonify
+from flask_cors import CORS
 
 def create_app():
     app = Flask(__name__, static_folder='.', static_url_path='')
     app.secret_key = 'bitfury-tech-investment-secret'
+    CORS(app)
 
     users = {
         'admin@bitfurytechinvestment.com': {'password': 'Admin123!', 'name': 'Admin Team', 'role': 'admin'},
@@ -22,7 +23,42 @@ def create_app():
 
     @app.route('/')
     def home():
-        return app.send_static_file('index.html')
+        return app.send_static_file('index.html')    
+    @app.route('/api/test', methods=['GET'])
+    def api_test():
+        return jsonify({
+            "message": "Flask API connected successfully"
+        })
+
+
+    @app.route('/api/login', methods=['POST'])
+    def api_login():
+
+        data = request.get_json()
+
+        email = data.get('email', '').strip().lower()
+        password = data.get('password', '')
+
+        user = users.get(email)
+
+        if user and user['password'] == password:
+
+            session['user'] = {
+                'email': email,
+                'name': user['name'],
+                'role': user['role']
+            }
+
+            return jsonify({
+                "status": "success",
+                "message": "Login successful",
+                "user": session['user']
+            })
+
+        return jsonify({
+            "status": "failed",
+            "message": "Invalid email or password"
+        }), 401
 
     @app.route('/login', methods=['GET', 'POST'])
     def login():
@@ -66,64 +102,129 @@ def create_app():
         return render_template_string('''
         <!doctype html>
         <html lang="en">
-          <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Create Account</title>
+          <head><metacharset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Create Account</title>
           <style>body{font-family:Arial,sans-serif;margin:0;background:#07111f;color:#f5f7fb} .wrap{max-width:560px;margin:2rem auto;padding:1rem} .card{background:rgba(255,255,255,.08);padding:2rem;border-radius:24px;border:1px solid rgba(255,255,255,.16)} .field{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1rem} input,select{padding:.8rem 1rem;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:#0b1730;color:#fff} button{border:0;border-radius:999px;padding:.8rem 1.1rem;font-weight:700;background:linear-gradient(135deg,#f2c94c,#ffd970);color:#07111f} a{color:#f2c94c;text-decoration:none}</style></head>
           <body><div class="wrap"><div class="card"><h1>Create Investor Account</h1><p>Join Bitfury Tech Investment and gain access to portfolio insights, investment plans, and dedicated support.</p><form method="post"><div class="field"><label>Full name</label><input name="name" required></div><div class="field"><label>Email</label><input name="email" type="email" required></div><div class="field"><label>Preferred plan</label><select name="plan"><option>Conservative</option><option selected>Balanced</option><option>Growth</option></select></div><div class="field"><label>Password</label><input name="password" type="password" required></div><button type="submit">Create account</button></form><p><a href="/login">Log in</a></p></div></div></body></html>
         ''')
 
-    @app.route('/dashboard')
-    def dashboard():
-        redirect_result = require_login()
-        if redirect_result:
-            return redirect_result
-        user = session['user']
-        return render_template_string('''
-        <!doctype html>
-        <html lang="en">
-          <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>User Dashboard</title>
-          <style>body{font-family:Arial,sans-serif;background:#07111f;color:#f5f7fb;margin:0} .wrap{max-width:1100px;margin:0 auto;padding:2rem} .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.card{background:rgba(255,255,255,.07);padding:1.5rem;border-radius:20px;border:1px solid rgba(255,255,255,.12)} a{color:#f2c94c} .top{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1.5rem}</style></head>
-          <body>
-            <div class="wrap">
-              <div class="top"><h1>User Dashboard</h1><a href="/logout">Logout</a></div>
-              <p>Welcome back, {{name}}. Your holdings and activity are up to date.</p>
-              <div class="grid">
-                <div class="card"><h3>Portfolio Value</h3><p>$1,248,000</p></div>
-                <div class="card"><h3>Monthly Return</h3><p>+8.4%</p></div>
-                <div class="card"><h3>Risk Level</h3><p>Balanced</p></div>
-              </div>
-              <p><a href="/profile">View profile</a> · <a href="/">Back to home</a></p>
-            </div>
-          </body>
-        </html>
-        ''', name=user['name'] 
-  
-)
+    @app.route("/api/dashboard", methods=["GET"])
+    def api_dashboard():
+      if "user" not in session:
+        return jsonify({
+            "success": False,
+            "message": "Unauthorized"
+        }), 401
 
-    @app.route('/profile')
+    user = session["user"]
+
+    return jsonify({
+        "success": True,
+        "name": user["name"],
+        "email": user["email"],
+        "role": user["role"],
+        "portfolio": 25400,
+        "balance": 8300,
+        "investments": 12,
+        "profit": 520,
+        "risk_level": "Balanced",
+        "photo": "/images/default-avatar.png"})
+    
+    
+    @app.route("/profile")
     def profile():
-        redirect_result = require_login()
-        if redirect_result:
-            return redirect_result
-        user = session['user']
-        return render_template_string('''
-        <!doctype html>
-        <html lang="en">
-          <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>User Profile</title>
-          <style>body{font-family:Arial,sans-serif;background:#07111f;color:#f5f7fb;margin:0} .wrap{max-width:900px;margin:0 auto;padding:2rem} .card{background:rgba(255,255,255,.07);padding:1.5rem;border-radius:20px;border:1px solid rgba(255,255,255,.12)} a{color:#f2c94c}</style></head>
-          <body>
-            <div class="wrap">
-              <div class="card">
-                <h1>User Profile</h1>
-                <p><strong>Name:</strong> {{name}}</p>
-                <p><strong>Email:</strong> {{email}}</p>
-                <p><strong>Role:</strong> {{role}}</p>
-                <p><strong>Status:</strong> Verified investor</p>
-                <p><a href="/dashboard">Back to dashboard</a> · <a href="/">Back to home</a></p>
-              </div>
+        if "user" not in session:
+            return redirect(url_for("login"))
+    user = session["user"]
+
+    return render_template_string("""
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Profile</title>
+
+        <style>
+            body{
+                margin:0;
+                font-family:Arial,sans-serif;
+                background:#07111f;
+                color:white;
+            }
+
+            .container{
+                max-width:800px;
+                margin:40px auto;
+                padding:20px;
+            }
+
+            .card{
+                background:#101d34;
+                border-radius:18px;
+                padding:30px;
+                text-align:center;
+            }
+
+            img{
+                width:120px;
+                height:120px;
+                border-radius:50%;
+                border:4px solid #f2c94c;
+                margin-bottom:20px;
+            }
+
+            h1{
+                margin-bottom:10px;
+            }
+
+            p{
+                font-size:18px;
+                margin:8px 0;
+            }
+
+            a{
+                display:inline-block;
+                margin-top:20px;
+                text-decoration:none;
+                background:#f2c94c;
+                color:#07111f;
+                padding:12px 24px;
+                border-radius:10px;
+                font-weight:bold;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <div class="card">
+                                  
+                <img src="/images/default-avatar.png">
+
+                <h1>{{ name }}</h1>
+
+                <p><strong>Email:</strong> {{ email }}</p>
+
+                <p><strong>Role:</strong> {{ role }}</p>
+
+                <p><strong>Status:</strong> Verified Investor</p>
+
+                <a href="/dashboard">Back to Dashboard</a>
+
             </div>
-          </body>
-        </html>
-        ''', name=user['name'], email=user['email'], role=user['role'])
+
+        </div>
+
+    </body>
+
+    </html>
+    """,
+    name=user["name"],
+    email=user["email"],
+    role=user["role"])
 
     @app.route('/admin')
     def admin():
