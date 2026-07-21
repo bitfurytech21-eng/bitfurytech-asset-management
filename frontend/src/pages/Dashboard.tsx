@@ -36,10 +36,16 @@ return(
 
 <Sidebar/>
 
-<div className="content">
+<div className="dashboard content">
 
-      <Topbar/>
-      <WelcomeCard name={data.name} />
+      <Topbar
+          name={data.name}
+          photo={data.photo}
+          />
+    
+      <WelcomeCard 
+          name={data.name} />
+    
       <div className="stats-grid">
 
     <StatCard
@@ -62,16 +68,6 @@ return(
   value={`+$${data.profit.toLocaleString()}`}
 />
 </div>
-<h1>Investor Dashboard</h1>
-
-<p>Welcome to Bitfury Tech Investment.</p>
-
+</main>
 </div>
-
-</div>
-
 );
-
-}
-
-export default Dashboard;
