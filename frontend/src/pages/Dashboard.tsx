@@ -1,3 +1,4 @@
+import InvestmentCard from "../components/InvestmentCard";
 import RecentTransactions from "../components/RecentTransactions";
 import PortfolioChart from "../components/PortfolioChart";
 import { useEffect, useState } from "react";
@@ -72,6 +73,37 @@ return(
 </div>
  <PortfolioChart portfolio={data.portfolio} />
   <import RecentTransactions/>
+  <h2 style={{ color: "#F2C94C", marginTop: "40px" }}>
+  Active Investments
+</h2>
+
+<InvestmentCard
+  title="Real Estate"
+  amount="$10,000"
+  roi="12.4%"
+  status="Running"
+/>
+
+<InvestmentCard
+  title="Agriculture"
+  amount="$6,500"
+  roi="8.2%"
+  status="Running"
+/>
+
+<InvestmentCard
+  title="Cryptocurrency"
+  amount="$4,200"
+  roi="15.8%"
+  status="Running"
+/>
+
+<InvestmentCard
+  title="Stocks"
+  amount="$3,100"
+  roi="7.4%"
+  status="Running"
+/>
 </main>
 </div>
 );
