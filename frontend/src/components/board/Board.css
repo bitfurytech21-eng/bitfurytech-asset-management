@@ -1,0 +1,147 @@
+.board-section {
+  padding: 80px 20px;
+  background: #f8fafc;
+  text-align: center;
+}
+
+.board-section h2 {
+  font-size: 2.2rem;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.board-section p {
+  color: #64748b;
+  margin-bottom: 40px;
+}
+
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.board-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.board-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.board-card img,
+.board-card-image {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+
+.board-card-content {
+  padding: 20px;
+}
+
+.board-card-content h3 {
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+.board-card-content p {
+  color: #64748b;
+  margin-bottom: 18px;
+}
+
+.board-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.board-btn:hover {
+  background: #1d4ed8;
+}
+
+.board-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.board-modal {
+  background: white;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 16px;
+  padding: 30px;
+  position: relative;
+  text-align: center;
+}
+
+.board-modal img,
+.board-image {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.board-modal h2 {
+  margin-bottom: 10px;
+  color: #0f172a;
+}
+
+.board-modal h4 {
+  color: #2563eb;
+  margin-bottom: 20px;
+}
+
+.board-modal p {
+  color: #475569;
+  line-height: 1.7;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #475569;
+}
+
+.close-btn:hover {
+  color: #ef4444;
+}
+
+@media (max-width: 768px) {
+  .board-card img,
+  .board-card-image {
+    height: 220px;
+  }
+
+  .board-modal {
+    padding: 20px;
+  }
+
+  .board-modal img,
+  .board-image {
+    width: 140px;
+    height: 140px;
+  }
+}
