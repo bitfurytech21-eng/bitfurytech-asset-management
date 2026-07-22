@@ -8,6 +8,7 @@ import Testimonials from "../components/Testimonials";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import CompanyVideo from "../components/CompanyVideo";
+import BoardSection from "../components/BoardSection";
 
 function Home() {
   return (
