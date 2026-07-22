@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import BoardModal from "./BoardModal",
 
 interface BoardMember {
   id: number;
@@ -9,7 +10,8 @@ interface BoardMember {
 }
 
 function BoardSection() {
-  const [members, setMembers] = useState<BoardMember[]>([]);
+  const [selectedMember, setSelectedMember] = useState<BoardMember | null>(null);
+const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetch("/api/board-members")
@@ -50,7 +52,14 @@ function BoardSection() {
     <BoardCard />
 
   </div>
-
+{selectedMember && (
+  <BoardModal
+    member={selectedMember}
+    isOpen={isModalOpen}
+    onClose={() => setIsModalOpen(false)}
+  />
+)}
+        
 </section>
  
       <div
@@ -87,10 +96,13 @@ function BoardSection() {
             <p>{member.position}</p>
 
             <button
-              onClick={() => alert(member.bio)}
-            >
-              View Biography
-            </button>
+           onClick={() => {
+           setSelectedMember(member);
+           setIsModalOpen(true);
+           }}
+        >
+           View Biography
+          </button>
           </div>
         ))}
       </div>
