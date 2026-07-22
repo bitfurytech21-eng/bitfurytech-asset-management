@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import BoardModal from "./BoardModal",
+import BoardCard from "./BoardCard.tsx",
+import Board from"./Board.css",
 
 interface BoardMember {
   id: number;
