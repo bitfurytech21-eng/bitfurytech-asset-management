@@ -19,6 +19,7 @@ function Home() {
 
                         <CompanyVideo />
                               <Services />
+                                <BoardSection />
                                     <Plans />
                                           <Payments />
                                                 <Testimonials />
