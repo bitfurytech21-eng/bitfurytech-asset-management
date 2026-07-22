@@ -17,10 +17,10 @@ function Home() {
                   <Hero />
                         <About />
 
-                        <CompanyVideo />
+                        <CompanyVideo />  
+                        <BoardSection />
                          <HowItWorks />
                               <Services />
-                                <BoardSection />
                                     <Plans />
                                           <Payments />
                                                 <Testimonials />
