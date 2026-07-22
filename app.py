@@ -109,7 +109,9 @@ def create_app():
 
     @app.route("/api/dashboard", methods=["GET"])
     def api_dashboard():
-      if "user" not in session:
+       if "user" not in session:
+
+
         return jsonify({
             "success": False,
             "message": "Unauthorized"
@@ -227,25 +229,29 @@ def create_app():
     role=user["role"])
 
     @app.route('/admin')
-    def admin():
+     def admin():
         redirect_result = require_admin()
         if redirect_result:
-            return redirect_result
+
+
+        return redirect_result
         return render_template_string('''
                 ''')        
         
 
     @app.route("/api/profile", methods=["GET"])
-    def api_profile():    
+     def api_profile():    
         
 
         if "user" not in session:
-            return jsonify({
+
+        
+        return jsonify({
                 "success": False,
                 "message": "Unauthorized"
             }), 401
 
-        user = session["user"]
+     user = session["user"]
 
         return jsonify({
             "success": True,
@@ -261,13 +267,13 @@ def create_app():
 
 
     
-    @app.route("/api/transactions", methods=["GET"])
- def api_transactions():
+ @app.route("/api/transactions", methods=["GET"])
+  def api_transactions():
 
-          if "user" not in session:
+    if "user" not in session:
                     return jsonify([]), 401
 
-            return jsonify([
+    return jsonify([
         {
             "id": 1,
             "type": "Deposit",
@@ -293,13 +299,14 @@ def create_app():
 
 
     
-    @app.route("/api/investments", methods=["GET"])
-def api_investments():
+@app.route("/api/investments", methods=["GET"])
+ def api_investments():
 
          if "user" not in session:
-                  return jsonify([]), 401
 
-          return jsonify([
+         return jsonify([]), 401
+
+         return jsonify([
         {
             "title": "Real Estate",
             "amount": 10000,
