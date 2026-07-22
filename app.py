@@ -25,14 +25,14 @@ def create_app():
     def home():
         return app.send_static_file('index.html')    
     @app.route('/api/test', methods=['GET'])
-    def api_test():
+     def api_test():
         return jsonify({
             "message": "Flask API connected successfully"
         })
 
 
     @app.route('/api/login', methods=['POST'])
-    def api_login():
+     def api_login():
 
         data = request.get_json()
 
@@ -61,7 +61,7 @@ def create_app():
         }), 401
 
     @app.route('/login', methods=['GET', 'POST'])
-    def login():
+     def login():
         if request.method == 'POST':
             email = request.form.get('email', '').strip().lower()
             password = request.form.get('password', '')
@@ -87,7 +87,7 @@ def create_app():
         ''')
 
     @app.route('/register', methods=['GET', 'POST'])
-    def register():
+     def register():
         if request.method == 'POST':
             email = request.form.get('email', '').strip().lower()
             name = request.form.get('name', '').strip()
@@ -241,12 +241,8 @@ def create_app():
 
     @app.route("/api/profile", methods=["GET"])
      def api_profile():    
-        
-
-        if "user" not in session:
-
-        
-        return jsonify({
+         if "user" not in session:
+         return jsonify({
                 "success": False,
                 "message": "Unauthorized"
             }), 401
@@ -269,11 +265,10 @@ def create_app():
     
  @app.route("/api/transactions", methods=["GET"])
   def api_transactions():
+        if "user" not in session:
+        return jsonify([]), 401
 
-    if "user" not in session:
-                    return jsonify([]), 401
-
-    return jsonify([
+     return jsonify([
         {
             "id": 1,
             "type": "Deposit",
@@ -301,10 +296,8 @@ def create_app():
     
 @app.route("/api/investments", methods=["GET"])
  def api_investments():
-
-         if "user" not in session:
-
-         return jsonify([]), 401
+      if "user" not in session:
+      return jsonify([]), 401
 
          return jsonify([
         {
@@ -336,11 +329,10 @@ def create_app():
     
     @app.route("/api/notifications", methods=["GET"])
      def api_notifications():
+           if "user" not in session:
+           return jsonify([]), 401
 
-          if "user" not in session:
-               return jsonify([]), 401
-
-          return jsonify([
+           return jsonify([
         {
             "title": "Deposit Confirmed",
             "message": "Your deposit has been confirmed."
@@ -357,20 +349,19 @@ def create_app():
     
 
     @app.route('/logout')
-    def logout():
+     def logout():
         session.pop('user', None)
         return redirect(url_for('home'))
         
-    return app
-
-app = create_app()
+     return app
+     app = create_app()
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
     
 
 @app.route("/api/board-members", methods=["GET"])        
-     def board_members():
+ def board_members():
          
       return jsonify([
         {
