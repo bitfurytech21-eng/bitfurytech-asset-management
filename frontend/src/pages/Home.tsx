@@ -10,6 +10,8 @@ import Footer from "../components/Footer";
 import CompanyVideo from "../components/CompanyVideo";
 import BoardSection from "../components/BoardSection";
 import HowItWorks from "../components/HowItWorks";
+import FAQ from "../components/FAQ";
+
 function Home() {
   return (
       <>
@@ -25,6 +27,7 @@ function Home() {
                                           <Payments />
                                                 <Testimonials />
                                                       <Contact />
+                                                       <FAQ />
                                                             <Footer />
                                                                 </>
                                                                   );
