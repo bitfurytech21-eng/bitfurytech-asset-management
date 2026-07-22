@@ -1,55 +1,70 @@
-function Plans() {
-      return (
-          <section className="section plans" id="plans">
-                <div className="container">
-                        <div className="section-heading">
-                                  <p className="eyebrow">Investment Plans</p>
-                                            <h2>Choose a strategy that fits your ambition</h2>
-                                                    </div>
+import PlanExplorer from "./PlanExplorer";
+import PlanTierCard from "./PlanTierCard";
+import PlanDetails from "./PlanDetails";
+export React, { useState } from "react";
 
-                                                            <div className="card-grid">
-                                                                      <article className="plan-card">
-                                                                                  <h3>Conservative</h3>
-                                                                                              <p className="price">
-                                                                                                            6–8% <span>/ month</span>
-                                                                                                                        </p>
+const investmentPlans = [
+  {
+    title: "Stock Plan",
+    image: "/Images/Plans/stock.png",
+    description:
+      "Access global stock market opportunities through BitfuryTech managed strategies.",
+  },
+  {
+    title: "Crypto Plan",
+    image: "/Images/Plans/crypto.png",
+    description:
+      "Explore digital asset opportunities with professional market analysis.",
+  },
+  {
+    title: "Real Estate Plan",
+    image: "/Images/Plans/real-estate.png",
+    description:
+      "Participate in property investment opportunities managed by BitfuryTech.",
+  },
+  {
+    title: "Agriculture plan",
+    image: "/Images/plans/agricuture",
 
-                                                                                                                                    <ul>
-                                                                                                                                                  <li>Capital preservation focus</li>
-                                                                                                                                                                <li>Low-volatility allocations</li>
-                                                                                                                                                                              <li>Quarterly reviews</li>
-                                                                                                                                                                                          </ul>
-                                                                                                                                                                                                    </article>
+export default function Plans() {
+  const [selectedPlan, setSelectedPlan] = useState<any>(null);
 
-                                                                                                                                                                                                              <article className="plan-card featured">
-                                                                                                                                                                                                                          <h3>Balanced</h3>
-                                                                                                                                                                                                                                      <p className="price">
-                                                                                                                                                                                                                                                    10–12% <span>/ month</span>
-                                                                                                                                                                                                                                                                </p>
+  return (
+    <section className="plans-section">
 
-                                                                                                                                                                                                                                                                            <ul>
-                                                                                                                                                                                                                                                                                          <li>Mixed growth and protection</li>
-                                                                                                                                                                                                                                                                                                        <li>Active portfolio rebalancing</li>
-                                                                                                                                                                                                                                                                                                                      <li>Priority support</li>
-                                                                                                                                                                                                                                                                                                                                  </ul>
-                                                                                                                                                                                                                                                                                                                                            </article>
+      <h2>Investment Plans</h2>
 
-                                                                                                                                                                                                                                                                                                                                                      <article className="plan-card">
-                                                                                                                                                                                                                                                                                                                                                                  <h3>Growth</h3>
-                                                                                                                                                                                                                                                                                                                                                                              <p className="price">
-                                                                                                                                                                                                                                                                                                                                                                                            15%+ <span>/ month</span>
-                                                                                                                                                                                                                                                                                                                                                                                                        </p>
+      <div className="plans-grid">
 
-                                                                                                                                                                                                                                                                                                                                                                                                                    <ul>
-                                                                                                                                                                                                                                                                                                                                                                                                                                  <li>Higher-growth allocation mix</li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                <li>Dynamic opportunity capture</li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                              <li>Dedicated market insights</li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </ul>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </article>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </section>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+        {investmentPlans.map((plan) => (
+          <div className="plan-card" key={plan.title}>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        export default Plans;
+            <img src={plan.image} alt={plan.title}/>
+
+            <h3>{plan.title}</h3>
+
+            <p>{plan.description}</p>
+
+            <button
+              onClick={() => setSelectedPlan(plan)}
+            >
+              Explore Plan
+            </button>
+
+          </div>
+        ))}
+
+      </div>
+
+
+      {selectedPlan && (
+        <PlanExplorer 
+          plan={selectedPlan}
+          close={() => setSelectedPlan(null)}
+        />
+      )}
+
+    </section>
+  );
+}
+                                                                        
