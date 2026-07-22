@@ -1,45 +1,55 @@
-function Testimonials() {
-      return (
-          <section className="section testimonials">
-                <div className="container">
-                        <div className="section-heading">
-                                  <p className="eyebrow">Client Voices</p>
-                                            <h2>
-                                                        Trusted by investors seeking consistency and clarity
-                                                                  </h2>
-                                                                          </div>
+import React from "react";
+import "./Testimonials.css";
 
-                                                                                  <div className="card-grid">
-                                                                                            <article className="card quote-card">
-                                                                                                        <p>
-                                                                                                                      "They manage my assets and funds with professionalism,
-                                                                                                                                    care, and excellent communication."
-                                                                                                                                                </p>
+const testimonials = [
+  {
+    name: "Michael A.",
+    country: "United Kingdom",
+    plan: "Stock Plan",
+    message:
+      "The platform is easy to use, and the investment dashboard makes it simple to monitor my portfolio.",
+  },
+  {
+    name: "Sophia L.",
+    country: "Canada",
+    plan: "Real Estate Plan",
+    message:
+      "I appreciate the clear investment information and the professional presentation of every plan.",
+  },
+  {
+    name: "Daniel K.",
+    country: "Australia",
+    plan: "Crypto Plan",
+    message:
+      "The investment options are well organized, and customer support has been responsive whenever I had questions.",
+  },
+];
 
-                                                                                                                                                            <strong>— Investor</strong>
-                                                                                                                                                                      </article>
+const Testimonials = () => {
+  return (
+    <section className="testimonials">
+      <div className="section-title">
+        <h2>What Investors Say</h2>
+        <p>
+          Hear what users appreciate about the BitfuryTech investment platform.
+        </p>
+      </div>
 
-                                                                                                                                                                                <article className="card quote-card">
-                                                                                                                                                                                            <p>
-                                                                                                                                                                                                          "Deposits and withdrawals are fast, transparent,
-                                                                                                                                                                                                                        and straightforward."
-                                                                                                                                                                                                                                    </p>
+      <div className="testimonial-grid">
+        {testimonials.map((item, index) => (
+          <div className="testimonial-card" key={index}>
+            <p>"{item.message}"</p>
 
-                                                                                                                                                                                                                                                <strong>— Private Client</strong>
-                                                                                                                                                                                                                                                          </article>
+            <h3>{item.name}</h3>
 
-                                                                                                                                                                                                                                                                    <article className="card quote-card">
-                                                                                                                                                                                                                                                                                <p>
-                                                                                                                                                                                                                                                                                              "The trading reports and insights are thoughtful,
-                                                                                                                                                                                                                                                                                                            timely, and easy to understand."
-                                                                                                                                                                                                                                                                                                                        </p>
+            <span>
+              {item.country} • {item.plan}
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
-                                                                                                                                                                                                                                                                                                                                    <strong>— Long-term Partner</strong>
-                                                                                                                                                                                                                                                                                                                                              </article>
-                                                                                                                                                                                                                                                                                                                                                      </div>
-                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                </section>
-                                                                                                                                                                                                                                                                                                                                                                  );
-                                                                                                                                                                                                                                                                                                                                                                  }
-
-                                                                                                                                                                                                                                                                                                                                                                  export default Testimonials;
+export default Testimonials;
