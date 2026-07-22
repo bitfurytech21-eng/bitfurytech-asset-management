@@ -7,6 +7,7 @@ import Payments from "../components/Payments";
 import Testimonials from "../components/Testimonials";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
+import CompanyVideo from "../components/CompanyVideo";
 
 function Home() {
   return (
@@ -14,6 +15,8 @@ function Home() {
             <Header />
                   <Hero />
                         <About />
+
+                        <CompanyVideo />
                               <Services />
                                     <Plans />
                                           <Payments />

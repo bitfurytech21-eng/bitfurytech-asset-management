@@ -356,6 +356,7 @@ def api_notifications():
             "message": "Your account is protected."
         }
     ])
+
     @app.route('/logout')
     def logout():
         session.pop('user', None)
@@ -365,6 +366,30 @@ def api_notifications():
 
 app = create_app()
 
-
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
+
+@app.route("/api/board-members", methods=["GET"])
+def board_members():
+    return jsonify([
+        {
+            "id": 1,
+            "name": "John Smith",
+            "position": "Chief Executive Officer",
+            "image": "/images/board/ceo.jpg",
+            "bio": "John Smith has over 25 years of leadership experience in global investment management."
+        },
+        {
+            "id": 2,
+            "name": "Jane Williams",
+            "position": "Chief Financial Officer",
+            "image": "/images/board/cfo.jpg",
+            "bio": "Jane Williams oversees financial strategy, risk management, and corporate governance."
+        }
+    ])
+    if __name__ == "__main__":
+    app.run(
+        host="0.0.0.0",
+        port=5000,
+        debug=True
+    )
