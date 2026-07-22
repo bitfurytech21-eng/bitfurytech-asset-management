@@ -232,54 +232,42 @@ def create_app():
         if redirect_result:
             return redirect_result
         return render_template_string('''
-        <!doctype html>
-        <html lang="en">
-          <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Admin Panel</title>
-          <style>body{font-family:Arial,sans-serif;background:#07111f;color:#f5f7fb;margin:0} .wrap{max-width:1000px;margin:0 auto;padding:2rem} .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}.card{background:rgba(255,255,255,.07);padding:1.5rem;border-radius:20px;border:1px solid rgba(255,255,255,.12)} a{color:#f2c94c} li{line-height:1.8}</style></head>
-          <body>
-            <div class="wrap">
-              <h1>Admin Panel</h1>
-              <p>Administrative controls for portfolio allocation, compliance, and reporting.</p>
-              <div class="grid">
-                <div class="card"><h3>Portfolio Allocation</h3><ul><li>Real estate: 40%</li><li>Stocks: 35%</li><li>Precision metals: 25%</li></ul></div>
-                <div class="card"><h3>Admin Actions</h3><ul><li>Approve investor requests</li><li>Monitor performance reports</li><li>Configure risk thresholds</li></ul></div>
-              </div>
-              <p><a href="/dashboard">Back to dashboard</a> · <a href="/logout">Logout</a></p>
-            </div>
-          </body>
-        </html>
-        ''')
+                ''')        
         
+
     @app.route("/api/profile", methods=["GET"])
-def api_profile():
+    def api_profile():    
+        
 
-    if "user" not in session:
+        if "user" not in session:
+            return jsonify({
+                "success": False,
+                "message": "Unauthorized"
+            }), 401
+
+        user = session["user"]
+
         return jsonify({
-            "success": False,
-            "message": "Unauthorized"
-        }), 401
+            "success": True,
+            "name": user["name"],
+            "email": user["email"],
+            "role": user["role"],
+            "phone": "+1 000 000 0000",
+            "country": "Australia",
+            "photo": "/images/default-avatar.png",
+            "status": "Verified",
+            "kyc": "Completed"
+        })
 
-    user = session["user"]
 
-    return jsonify({
-        "success": True,
-        "name": user["name"],
-        "email": user["email"],
-        "role": user["role"],
-        "phone": "+1 000 000 0000",
-        "country": "Australia",
-        "photo": "/images/default-avatar.png",
-        "status": "Verified",
-        "kyc": "Completed"
-    })
     
     @app.route("/api/transactions", methods=["GET"])
-def api_transactions():
+ def api_transactions():
 
-    if "user" not in session:
-        return jsonify([]), 401
+          if "user" not in session:
+                    return jsonify([]), 401
 
-    return jsonify([
+            return jsonify([
         {
             "id": 1,
             "type": "Deposit",
@@ -302,14 +290,16 @@ def api_transactions():
             "date": "2026-07-18"
         }
     ])
+
+
     
     @app.route("/api/investments", methods=["GET"])
 def api_investments():
 
-    if "user" not in session:
-        return jsonify([]), 401
+         if "user" not in session:
+                  return jsonify([]), 401
 
-    return jsonify([
+          return jsonify([
         {
             "title": "Real Estate",
             "amount": 10000,
@@ -336,13 +326,14 @@ def api_investments():
         }
     ])
     
+    
     @app.route("/api/notifications", methods=["GET"])
-def api_notifications():
+     def api_notifications():
 
-    if "user" not in session:
-        return jsonify([]), 401
+          if "user" not in session:
+               return jsonify([]), 401
 
-    return jsonify([
+          return jsonify([
         {
             "title": "Deposit Confirmed",
             "message": "Your deposit has been confirmed."
@@ -356,6 +347,7 @@ def api_notifications():
             "message": "Your account is protected."
         }
     ])
+    
 
     @app.route('/logout')
     def logout():
@@ -368,10 +360,12 @@ app = create_app()
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
+    
 
-@app.route("/api/board-members", methods=["GET"])
-def board_members():
-    return jsonify([
+@app.route("/api/board-members", methods=["GET"])        
+     def board_members():
+         
+      return jsonify([
         {
             "id": 1,
             "name": "John Smith",
