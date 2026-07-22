@@ -20,8 +20,39 @@ function BoardSection() {
 
   return (
     <section style={{ padding: "60px" }}>
-      <h2 style={{ textAlign: "center" }}>Board of Directors</h2>
+      <h2 style={{ textAlign: "center" }}>Board of Directors</h2> 
 
+      <section className="board-section">
+
+  <div className="board-header">
+
+    <span>OUR EXPERTS</span>
+
+    <h2>WE ARE FRIENDLY & PROFESSIONAL</h2>
+
+    <p>
+      BitfuryTech Investment was founded in 2017 by a group of
+      skilled financial analysts, fund managers, and research
+      scientists with the mission of delivering disciplined
+      investment strategies while managing risk responsibly.
+    </p>
+
+  </div>
+
+  <div className="board-grid">
+
+    <BoardCard />
+
+    <BoardCard />
+
+    <BoardCard />
+
+    <BoardCard />
+
+  </div>
+
+</section>
+ 
       <div
         style={{
           display: "grid",
