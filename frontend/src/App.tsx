@@ -1,55 +1,44 @@
+import "./App.css";
+
+import Hero from "./components/Hero";
+import About from "./components/About";
+import CompanyVideo from "./components/CompanyVideo";
+import WhyChooseUs from "./components/WhyChooseUs";
+import MarketOverview from "./components/MarketOverview";
+import Plans from "./components/Plans";
+import Payments from "./components/Payments";
+import BoardSection from "./components/board/BoardSection";
+import Footer from "./components/Footer";
+
 function App() {
   return (
-    <div>
-
-      {/* Hero Section */}
-      <section style={{ padding: "60px", textAlign: "center" }}>
-        <h1>Bitfury Tech Investment</h1>
-        <p>Building Wealth, Securing Futures</p>
-
-        <button>Start Investing</button>
-      </section>
+    <div className="App">
+      {/* Hero */}
+      <Hero />
 
       {/* About Us */}
-      <section style={{ padding: "40px" }}>
-        <h2>About Us</h2>
+      <About />
 
-        <p>
-          Bitfury Tech Investment is a global investment platform focused on
-          Real Estate, Agriculture, Stocks and Digital Assets.
-        </p>
-      </section>
-
-      {/* Company Video */}
-      <section style={{ padding: "40px" }}>
-        <h2>Company Introduction</h2>
-
-        <p>
-          Company introduction video will appear here.
-        </p>
-      </section>
+      {/* Company Introduction Video */}
+      <CompanyVideo />
 
       {/* Why Choose Us */}
-      <section style={{ padding: "40px" }}>
-        <h2>Why Choose Us</h2>
+      <WhyChooseUs />
 
-        <ul>
-          <li>Secure Investments</li>
-          <li>Professional Management</li>
-          <li>Global Portfolio</li>
-          <li>24/7 Customer Support</li>
-        </ul>
-      </section>
+      {/* Market Overview */}
+      <MarketOverview />
+
+      {/* Investment Plans */}
+      <Plans />
+
+      {/* Payment Methods */}
+      <Payments />
 
       {/* Board of Directors */}
-      <section style={{ padding: "40px" }}>
-        <h2>Board of Directors</h2>
+      <BoardSection />
 
-        <p>
-          React will load the board members from the Flask backend here.
-        </p>
-      </section>
-
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
