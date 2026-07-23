@@ -182,3 +182,32 @@
     border-right-color: var(--border);
   }
 }
+.market-overview {
+  padding: 80px 20px;
+  background: #f8fafc;
+}
+
+.market-overview .container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.market-overview h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #0f172a;
+}
+
+.market-overview p {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #64748b;
+}
+
+.tradingview-widget-container {
+  width: 100%;
+  min-height: 650px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
