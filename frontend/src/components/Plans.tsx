@@ -1,12 +1,10 @@
 import PlanExplorer from "./PlanExplorer";
-import PlanTierCard from "./PlanTierCard";
-import PlanDetails from "./PlanDetails";
-export React, { useState } from "react";
+import { useState } from "react";
 
 const investmentPlans = [
   {
     title: "Stock Plan",
-    image: "/Images/Plans/stock.png",
+    image: "/Images/Plans/stocks.png",
     description:
       "Access global stock market opportunities through BitfuryTech managed strategies.",
   },
@@ -24,7 +22,11 @@ const investmentPlans = [
   },
   {
     title: "Agriculture plan",
-    image: "/Images/plans/agricuture",
+    image: "/Images/Plans/agriculture.png",
+    description:
+      "Invest in professionally managed agricultural opportunities and sustainable production.",
+  },
+];
 
 export default function Plans() {
   const [selectedPlan, setSelectedPlan] = useState<any>(null);
