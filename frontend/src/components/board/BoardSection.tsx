@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import BoardModal from "./BoardModal",
+import BoardModal from "./BoardModal";
 import BoardCard from "./BoardCard";
 import "./Board.css";
 
