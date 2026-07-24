@@ -1,90 +1,80 @@
-from flask import Blueprint, request, jsonify, session
+from flask import Blueprint, request, jsonify
+from extensions import db, bcrypt
+from models.user import User
 
 auth_bp = Blueprint("auth", __name__)
 
-# Temporary users (replace with database later)
-users = {
-    "admin@bitfurytechinvestment.com": {
-        "password": "Admin123!",
-        "name": "Administrator",
-        "role": "admin"
-    }
-}
 
-
-@auth_bp.route("/api/register", methods=["POST"])
+@auth_bp.route("/register", methods=["POST"])
 def register():
 
     data = request.get_json()
 
-    email = data.get("email", "").lower().strip()
-    password = data.get("password", "")
-    name = data.get("name", "")
+    if not data:
+        return jsonify({"success": False, "message": "No data received"}), 400
 
-    if email in users:
+    full_name = data.get("full_name")
+    email = data.get("email")
+    password = data.get("password")
+
+    if not full_name or not email or not password:
+        return jsonify({
+            "success": False,
+            "message": "All fields are required."
+        }), 400
+
+    existing_user = User.query.filter_by(email=email).first()
+
+    if existing_user:
         return jsonify({
             "success": False,
             "message": "Email already exists."
         }), 409
 
-    users[email] = {
-        "password": password,
-        "name": name,
-        "role": "user"
-    }
+    hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
+
+    user = User(
+        full_name=full_name,
+        email=email,
+        password=hashed_password
+    )
+
+    db.session.add(user)
+    db.session.commit()
 
     return jsonify({
         "success": True,
         "message": "Registration successful."
-    })
+    }), 201
 
 
-@auth_bp.route("/api/login", methods=["POST"])
+@auth_bp.route("/login", methods=["POST"])
 def login():
 
     data = request.get_json()
 
-    email = data.get("email", "").lower().strip()
-    password = data.get("password", "")
+    if not data:
+        return jsonify({"success": False, "message": "No data received"}), 400
 
-    user = users.get(email)
+    email = data.get("email")
+    password = data.get("password")
 
-    if not user or user["password"] != password:
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
         return jsonify({
             "success": False,
             "message": "Invalid email or password."
         }), 401
 
-    session["user"] = {
-        "email": email,
-        "name": user["name"],
-        "role": user["role"]
-    }
-
-    return jsonify({
-        "success": True,
-        "user": session["user"]
-    })
-
-
-@auth_bp.route("/api/logout")
-def logout():
-
-    session.clear()
-
-    return jsonify({
-        "success": True,
-        "message": "Logged out successfully."
-    })
-
-
-@auth_bp.route("/api/me")
-def me():
-
-    if "user" not in session:
+    if not bcrypt.check_password_hash(user.password, password):
         return jsonify({
             "success": False,
-            "message": "Not logged in."
+            "message": "Invalid email or password."
         }), 401
 
-    return jsonify(session["user"])
+    return jsonify({
+        "success": True,
+        "message": "Login successful.",
+        "user": user.to_dict()
+    })
