@@ -8,7 +8,7 @@ function Login() {
   const handleLogin = async (e:React.FormEvent<HTMLFormElement>)=> {e.preventDefault();//your login code};
     
    try {
-      const response = await fetch(`${API}/api/auth/login`, {
+      const response = await fetch(`bitfurytech-asset-management-5.onrender.com/api/auth/login`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ email, password })
