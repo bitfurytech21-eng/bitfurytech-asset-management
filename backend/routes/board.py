@@ -1,23 +1,40 @@
 from flask import Blueprint, jsonify
+from models.board import BoardMember
 
 board_bp = Blueprint("board", __name__)
 
-@board_bp.route("/api/board-members", methods=["GET"])
-def board():
 
-    return jsonify([
-        {
-            "id": 1,
-            "name": "John Smith",
-            "position": "Chief Executive Officer",
-            "image": "/images/board/ceo.jpg",
-            "bio": "25 years investment management."
-        },
-        {
-            "id": 2,
-            "name": "Jane Williams",
-            "position": "Chief Financial Officer",
-            "image": "/images/board/cfo.jpg",
-            "bio": "Corporate finance specialist."
-        }
-    ])
+@board_bp.route("/board-members", methods=["GET"])
+def get_board_members():
+
+    members = BoardMember.query.filter_by(
+        is_active=True
+    ).order_by(
+        BoardMember.display_order
+    ).all()
+
+    return jsonify({
+        "success": True,
+        "count": len(members),
+        "members": [
+            member.to_dict()
+            for member in members
+        ]
+    })
+
+
+@board_bp.route("/board-member/<int:member_id>", methods=["GET"])
+def get_board_member(member_id):
+
+    member = BoardMember.query.get(member_id)
+
+    if not member:
+        return jsonify({
+            "success": False,
+            "message": "Board member not found."
+        }), 404
+
+    return jsonify({
+        "success": True,
+        "member": member.to_dict()
+    })
