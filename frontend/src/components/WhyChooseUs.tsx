@@ -1,4 +1,4 @@
-function WhyChooseUs() {
+function WhyChooseUs () {
   return (
     <section>
       <h2>Why Choose Bitfury Tech Investment?</h2>
