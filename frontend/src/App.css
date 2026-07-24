@@ -211,3 +211,12 @@
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+section:empty {
+  display: none;
+}
+if (!data) return null; 
