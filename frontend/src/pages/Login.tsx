@@ -8,8 +8,11 @@ function Login() {
   const handleLogin = async (e:React.FormEvent<HTMLFormElement>)=> {e.preventDefault();//your login code};
     
    try {
-      const response = await fetch(
-        "http://127.0.0.1:5000/api/login",
+      const response = await fetch(`${API}/api/auth/login`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email, password })
+});
         {
           method: "POST",
           headers: {
@@ -22,11 +25,6 @@ function Login() {
           }),
         }
       );
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setMessage("Login successful");
 
         // Optional: go to dashboard
         window.location.href = "/dashboard";
