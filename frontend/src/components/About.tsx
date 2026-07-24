@@ -1,51 +1,49 @@
 function About() {
-      return (
-          <section className="about section" id="about">
-                <div className="container about-grid">
-                        <div>
-                                  <p className="eyebrow">About us</p>
+  return (
+    <section className="about section" id="about">
+      <div className="container about-grid">
+        <div>
+          <p className="eyebrow">About us</p>
 
-                                            <h2>
-                                                        Forward-thinking investment solutions with real-world discipline.
-                                                                  </h2>
+          <h2>
+            Forward-thinking investment solutions with real-world discipline.
+          </h2>
 
-                                                                            <p>
-                                                                                        Bitfury Tech Investment is an algorithm-driven trading and
-                                                                                                    investment firm focused on delivering superior risk-adjusted
-                                                                                                                returns. Our mission is simple: create thoughtful investment
-                                                                                                                            allocations that produce exceptional results while protecting
-                                                                                                                                        capital.
-                                                                                                                                                  </p>
+          <p>
+            Bitfury Tech Investment is an algorithm-driven trading and
+            investment firm focused on delivering superior risk-adjusted
+            returns. Our mission is simple: create thoughtful investment
+            allocations that produce exceptional results while protecting
+            capital.
+          </p>
 
-                                                                                                                                                            <p>
-                                                                                                                                                                        Founded by seasoned financial analysts, fund managers, and research
-                                                                                                                                                                                    scientists, we blend mathematical discipline with market
-                                                                                                                                                                                                intelligence to navigate changing conditions across crypto,
-                                                                                                                                                                                                            equities, and real estate markets.
-                                                                                                                                                                                                                      </p>
+          <p>
+            Founded by seasoned financial analysts, fund managers, and research
+            scientists, we blend mathematical discipline with market
+            intelligence to navigate changing conditions across crypto,
+            equities, and real estate markets.
+          </p>
 
-                                                                                                                                                                                                                                <div className="trust-row">
-                                                                                                                                                                                                                                            <div className="trust-pill">SECURE</div>
-                                                                                                                                                                                                                                                        <div className="trust-pill">TRANSPARENT</div>
-                                                                                                                                                                                                                                                                    <div className="trust-pill">PROVEN</div>
-                                                                                                                                                                                                                                                                              </div>
-                                                                                                                                                                                                                                                                                      </div>
+          <div className="trust-row">
+            <div className="trust-pill">SECURE</div>
+            <div className="trust-pill">TRANSPARENT</div>
+            <div className="trust-pill">PROVEN</div>
+          </div>
+        </div>
 
-                                                                                                                                                                                                                                                                                              <div className="info-panel">
-                                                                                                                                                                                                                                                                                                        <h3>Why clients choose us</h3>
+        <div className="info-panel">
+          <h3>Why clients choose us</h3>
 
-                                                                                                                                                                                                                                                                                                                  <ul>
-                                                                                                                                                                                                                                                                                                                              <li>Institutional-grade research and execution</li>
-                                                                                                                                                                                                                                                                                                                                          <li>Flexible portfolio allocation across asset classes</li>
-                                                                                                                                                                                                                                                                                                                                                      <li>Transparent reporting and responsive support</li>
-                                                                                                                                                                                                                                                                                                                                                                  <li>
-                                                                                                                                                                                                                                                                                                                                                                                Secure digital infrastructure and encrypted communications
-                                                                                                                                                                                                                                                                                                                                                                                            </li>
-                                                                                                                                                                                                                                                                                                                                                                                                      </ul>
-                                                                                                                                                                                                                                                                                                                                                                                                              </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                        </section>
-                                                                                                                                                                                                                                                                                                                                                                                                                          );
-                                                                                                                                                                                                                                                                                                                                                                                                                          }
+          <ul>
+            <li>Institutional-grade research and execution</li>
+            <li>Flexible portfolio allocation across asset classes</li>
+            <li>Transparent reporting and responsive support</li>
+            <li>Secure digital infrastructure and encrypted communications</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-                                                                                                                                                                                                                                                                                                                                                                                                                          export default About;
+export default About;
