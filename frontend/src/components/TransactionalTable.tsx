@@ -1,4 +1,3 @@
-import TransactionTable from "../components/TransactionTable";
 import { useEffect, useState } from "react";
 
 interface Transaction {
@@ -13,9 +12,9 @@ export default function TransactionTable() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/api/transactions")
+    fetch("/api/transactions")
       .then((res) => res.json())
-      .then((data) => setTransactions(data))
+      .then((data) => setTransactions(data.transactions ?? []))
       .catch((err) => console.error(err));
   }, []);
 

@@ -26,7 +26,7 @@ interface DashboardData {
 function Dashboard(){const [data, setData] = useState<DashboardData | null>(null);
 
 useEffect(() => {
-  fetch("http:bitfurytech-asset-management-5.onrender.com/api/dashboard", {
+  fetch("/api/dashboard", {
     credentials: "include",
   })
     .then((res) => res.json())
@@ -75,7 +75,7 @@ return(
 />
 </div>
  <PortfolioChart portfolio={data.portfolio} />
-  <import RecentTransactions/>
+  <RecentTransactions />
   <h2 style={{ color: "#F2C94C", marginTop: "40px" }}>
   Active Investments
 </h2>
@@ -115,6 +115,9 @@ return(
     role={data.role}
     photo={data.photo}
 />
-</main>
+</div>
 </div>
 );
+}
+
+export default Dashboard;
