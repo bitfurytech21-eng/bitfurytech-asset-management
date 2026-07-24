@@ -2,14 +2,18 @@ import os
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
+
 class Config:
-    SECRET_KEY = os.getenv(
+    SECRET_KEY = os.environ.get(
         "SECRET_KEY",
         "bitfury-tech-investment-secret"
     )
 
-    SQLALCHEMY_DATABASE_URI = (
-        "sqlite:///" + os.path.join(BASE_DIR, "database", "bitfurydb.db")
+    SQLALCHEMY_DATABASE_URI = os.environ.get(
+        "DATABASE_URL",
+        f"sqlite:///{os.path.join(BASE_DIR, 'database', 'bitfury.db')}"
     )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    JSON_SORT_KEYS = False
