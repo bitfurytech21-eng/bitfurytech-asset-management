@@ -1,0 +1,15 @@
+function WhyChooseUs() {
+  return (
+    <section>
+      <h2>Why Choose Bitfury Tech Investment?</h2>
+      <ul>
+        <li>Secure investment platform</li>
+        <li>Real-time portfolio tracking</li>
+        <li>Professional asset management</li>
+        <li>24/7 customer support</li>
+      </ul>
+    </section>
+  );
+}
+
+export default WhyChooseUs;
