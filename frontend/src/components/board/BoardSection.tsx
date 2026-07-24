@@ -13,12 +13,13 @@ interface BoardMember {
 
 function BoardSection() {
   const [selectedMember, setSelectedMember] = useState<BoardMember | null>(null);
-const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [members, setMembers] = useState<BoardMember[]>([]);
 
   useEffect(() => {
     fetch("/api/board-members")
       .then((response) => response.json())
-      .then((data) => setMembers(data))
+      .then((data) => setMembers(data.members ?? []))
       .catch((error) => console.error(error));
   }, []);
 
@@ -45,69 +46,26 @@ const [isModalOpen, setIsModalOpen] = useState(false);
 
   <div className="board-grid">
 
-    <BoardCard />
-
-    <BoardCard />
-
-    <BoardCard />
-
-    <BoardCard />
+    {members.map((member) => (
+      <BoardCard
+        key={member.id}
+        member={member}
+        onClick={() => {
+          setSelectedMember(member);
+          setIsModalOpen(true);
+        }}
+      />
+    ))}
 
   </div>
-{selectedMember && (
+{selectedMember && isModalOpen && (
   <BoardModal
     member={selectedMember}
-    isOpen={isModalOpen}
     onClose={() => setIsModalOpen(false)}
   />
 )}
-        
+
 </section>
- 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px,1fr))",
-          gap: "20px",
-          marginTop: "30px"
-        }}
-      >
-        {members.map((member) => (
-          <div
-            key={member.id}
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: "12px",
-              padding: "20px",
-              textAlign: "center"
-            }}
-          >
-            <img
-              src={member.image}
-              alt={member.name}
-              width="150"
-              height="150"
-              style={{
-                borderRadius: "50%",
-                objectFit: "cover"
-              }}
-            />
-
-            <h3>{member.name}</h3>
-
-            <p>{member.position}</p>
-
-            <button
-           onClick={() => {
-           setSelectedMember(member);
-           setIsModalOpen(true);
-           }}
-        >
-           View Biography
-          </button>
-          </div>
-        ))}
-      </div>
     </section>
   );
 }

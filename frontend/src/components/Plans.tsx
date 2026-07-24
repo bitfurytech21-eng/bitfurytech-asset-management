@@ -1,30 +1,28 @@
 import { useState } from "react";
 import PlanExplorer from "./PlanExplorer";
-import PlanTierCard from "./PlanTierCard";
-import PlanDetails from "./PlanDetails";
 
 const investmentPlans = [
   {
     title: "Stock Plan",
-    image: "/images/plans/stock.png",
+    image: "/images/plans/stocks.jpeg",
     description:
       "Access global stock market opportunities through BitfuryTech managed strategies.",
   },
   {
     title: "Crypto Plan",
-    image: "/images/plans/crypto.png",
+    image: "/images/plans/crypto.jpeg",
     description:
       "Explore digital asset opportunities with professional market analysis.",
   },
   {
     title: "Real Estate Plan",
-    image: "/images/plans/real-estate.png",
+    image: "/images/plans/real-estate.jpeg",
     description:
       "Participate in property investment opportunities managed by BitfuryTech.",
   },
   {
     title: "Agriculture Plan",
-    image: "/images/plans/agriculture.png",
+    image: "/images/plans/agricuture.jpeg",
     description:
       "Invest in modern agricultural opportunities with sustainable returns.",
   },
@@ -59,9 +57,6 @@ export default function Plans() {
           close={() => setSelectedPlan(null)}
         />
       )}
-
-      <PlanTierCard />
-      <PlanDetails />
     </section>
   );
 }
