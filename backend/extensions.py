@@ -9,4 +9,3 @@ bcrypt = Bcrypt()
 migrate = Migrate()
 cors = CORS()
 jwt = JWTManager()
-
