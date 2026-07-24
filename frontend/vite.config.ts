@@ -9,7 +9,7 @@ export default defineConfig({
 
             proxy: {
                   '/api': {
-                          target: 'https://bitfurytech-asset-management-5.onrender.com',
+                          target: 'https://bitfurytech-asset-management-5.onrender.com/',
                                   changeOrigin: true,
                                           secure: false
                                                 }
