@@ -1,10 +1,11 @@
 from flask import Flask
-from flask_cors import CORS
-
 from config import Config
-from extensions import db, bcrypt
+from extensions import db, bcrypt, migrate, cors
 
-# Import blueprints
+# Import all models
+from models import *
+
+# Import all blueprints
 from routes.auth import auth_bp
 from routes.dashboard import dashboard_bp
 from routes.profile import profile_bp
@@ -18,45 +19,38 @@ from routes.faq import faq_bp
 
 
 def create_app():
-
-    app = Flask(
-        __name__,
-        static_folder="static",
-        static_url_path="/static"
-    )
+    app = Flask(__name__)
 
     app.config.from_object(Config)
 
-    CORS(
-        app,
-        supports_credentials=True
-    )
-
+    # Initialize extensions
     db.init_app(app)
     bcrypt.init_app(app)
+    migrate.init_app(app, db)
+    cors.init_app(app)
 
-    with app.app_context():
-        db.create_all()
-
-    # Register Blueprints
-    app.register_blueprint(auth_bp)
-    app.register_blueprint(dashboard_bp)
-    app.register_blueprint(profile_bp)
-    app.register_blueprint(investment_bp)
-    app.register_blueprint(transaction_bp)
-    app.register_blueprint(notification_bp)
-    app.register_blueprint(board_bp)
-    app.register_blueprint(payment_bp)
-    app.register_blueprint(market_bp)
-    app.register_blueprint(faq_bp)
+    # Register blueprints
+    app.register_blueprint(auth_bp, url_prefix="/api")
+    app.register_blueprint(dashboard_bp, url_prefix="/api")
+    app.register_blueprint(profile_bp, url_prefix="/api")
+    app.register_blueprint(investment_bp, url_prefix="/api")
+    app.register_blueprint(transaction_bp, url_prefix="/api")
+    app.register_blueprint(notification_bp, url_prefix="/api")
+    app.register_blueprint(board_bp, url_prefix="/api")
+    app.register_blueprint(payment_bp, url_prefix="/api")
+    app.register_blueprint(market_bp, url_prefix="/api")
+    app.register_blueprint(faq_bp, url_prefix="/api")
 
     @app.route("/")
     def home():
         return {
-            "application": "Bitfury Tech Investment",
-            "status": "Backend Running",
+            "application": "Bitfury Tech Investment API",
+            "status": "Running",
             "version": "1.0.0"
         }
+
+    with app.app_context():
+        db.create_all()
 
     return app
 
