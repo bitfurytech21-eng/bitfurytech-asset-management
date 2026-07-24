@@ -67,4 +67,4 @@ export default function Plans() {
     </section>
   );
 }
-                                                                        
+export default Plan;
