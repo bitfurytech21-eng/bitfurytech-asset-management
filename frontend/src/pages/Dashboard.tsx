@@ -26,7 +26,7 @@ interface DashboardData {
 function Dashboard(){const [data, setData] = useState<DashboardData | null>(null);
 
 useEffect(() => {
-  fetch("http://127.0.0.1:5000/api/dashboard", {
+  fetch("http:bitfurytech-asset-management-5.onrender.com/api/dashboard", {
     credentials: "include",
   })
     .then((res) => res.json())
