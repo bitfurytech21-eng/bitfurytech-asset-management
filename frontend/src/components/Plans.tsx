@@ -1,7 +1,6 @@
 import PlanExplorer from "./PlanExplorer";
 import PlanTierCard from "./PlanTierCard";
 import PlanDetails from "./PlanDetails";
-export react, { useState } from "react";
 
 const investmentPlans = [
   {
