@@ -1,33 +1,38 @@
-from flask import Blueprint, jsonify, session
+from flask import Blueprint, jsonify
+from models.transaction import Transaction
 
 transaction_bp = Blueprint("transaction", __name__)
 
-@transaction_bp.route("/api/transactions", methods=["GET"])
-def transactions():
 
-    if "user" not in session:
-        return jsonify([]), 401
+@transaction_bp.route("/transactions", methods=["GET"])
+def get_transactions():
 
-    return jsonify([
-        {
-            "id": 1,
-            "type": "Deposit",
-            "amount": 5000,
-            "status": "Completed",
-            "date": "2026-07-23"
-        },
-        {
-            "id": 2,
-            "type": "Investment",
-            "amount": 2500,
-            "status": "Running",
-            "date": "2026-07-22"
-        },
-        {
-            "id": 3,
-            "type": "Withdrawal",
-            "amount": 800,
-            "status": "Pending",
-            "date": "2026-07-21"
-        }
-    ])
+    transactions = Transaction.query.order_by(
+        Transaction.created_at.desc()
+    ).all()
+
+    return jsonify({
+        "success": True,
+        "count": len(transactions),
+        "transactions": [
+            transaction.to_dict()
+            for transaction in transactions
+        ]
+    })
+
+
+@transaction_bp.route("/transaction/<int:transaction_id>", methods=["GET"])
+def get_transaction(transaction_id):
+
+    transaction = Transaction.query.get(transaction_id)
+
+    if not transaction:
+        return jsonify({
+            "success": False,
+            "message": "Transaction not found."
+        }), 404
+
+    return jsonify({
+        "success": True,
+        "transaction": transaction.to_dict()
+    })
