@@ -9,12 +9,24 @@ class Notification(db.Model):
 
     user_id = db.Column(
         db.Integer,
-        db.ForeignKey("users.id")
+        db.ForeignKey("users.id"),
+        nullable=False
     )
 
-    title = db.Column(db.String(150))
+    title = db.Column(
+        db.String(150),
+        nullable=False
+    )
 
-    message = db.Column(db.Text)
+    message = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    notification_type = db.Column(
+        db.String(30),
+        default="General"
+    )
 
     is_read = db.Column(
         db.Boolean,
@@ -25,3 +37,18 @@ class Notification(db.Model):
         db.DateTime,
         default=datetime.utcnow
     )
+
+    user = db.relationship(
+        "User",
+        backref="notifications"
+    )
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "message": self.message,
+            "notification_type": self.notification_type,
+            "is_read": self.is_read,
+            "created_at": self.created_at.isoformat()
+        }
