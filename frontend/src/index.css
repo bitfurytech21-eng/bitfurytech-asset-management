@@ -893,3 +893,7 @@
     }
     
     }
+
+    html{
+    scroll-behavior:smooth;
+}
