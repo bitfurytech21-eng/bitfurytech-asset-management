@@ -1,5 +1,5 @@
 import { useState } from "react";
-import BoardCard, { BoardMember } from "./BoardCard";
+import BoardCard from "./BoardCard";
 import BoardModal from "./BoardModal";
 
 const members: BoardMember[] = [
