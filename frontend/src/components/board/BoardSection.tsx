@@ -1,6 +1,6 @@
 import { useState } from "react";
 import BoardCard, { BoardMember } from "./BoardCard";
-import Boardmodel from "./Boardmodel";
+import Boardmodal from "./Boardmodal";
 
 const members: BoardMember[] = [
   {
