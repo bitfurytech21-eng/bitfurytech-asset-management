@@ -1,36 +1,38 @@
 import React from "react";
 
-interface BoardMember {
+export interface BoardMember {
+  id: number;
   name: string;
   position: string;
   image: string;
-  bio: string;
 }
 
-interface BoardCardProps {
+interface Props {
   member: BoardMember;
-  onClick: () => void;
+  onViewProfile: (id: number) => void;
 }
 
-const BoardCard: React.FC<BoardCardProps> = ({ member, onClick }) => {
+export default function BoardCard({ member, onViewProfile }: Props) {
   return (
-    <div className="board-card" onClick={onClick}>
+    <div className="board-card">
       <img
+        className="board-photo"
         src={member.image}
         alt={member.name}
-        className="board-card-image"
       />
 
-      <div className="board-card-content">
-        <h3>{member.name}</h3>
-        <p>{member.position}</p>
+      <h3>{member.name}</h3>
 
-        <button className="board-btn">
-          View Profile
-        </button>
-      </div>
+      <p className="board-position">
+        {member.position}
+      </p>
+
+      <button
+        className="board-btn"
+        onClick={() => onViewProfile(member.id)}
+      >
+        View Profile
+      </button>
     </div>
   );
-};
-
-export default BoardCard;
+}

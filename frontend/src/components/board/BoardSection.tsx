@@ -1,115 +1,71 @@
-import { useEffect, useState } from "react";
-import BoardModal from "./BoardModal";
-import BoardCard from "./BoardCard";
-import "./Board.css";
+import { useState } from "react";
+import BoardCard, { BoardMember } from "./BoardCard";
+import BoardProfileModal from "./BoardProfileModal";
 
-interface BoardMember {
-  id: number;
-  name: string;
-  position: string;
-  image: string;
-  bio: string;
-}
+const members: BoardMember[] = [
+  {
+    id: 1,
+    name: "John Smith",
+    position: "Chairman",
+    image: "/Images/Board/chairman.jpg",
+  },
+  {
+    id: 2,
+    name: "Sarah Williams",
+    position: "Chief Executive Officer",
+    image: "/Images/Board/ceo.jpg",
+  },
+  {
+    id: 3,
+    name: "Michael Johnson",
+    position: "Chief Financial Officer",
+    image: "/Images/Board/cfo.jpg",
+  },
+];
 
-function BoardSection() {
-  const [selectedMember, setSelectedMember] = useState<BoardMember | null>(null);
-const [isModalOpen, setIsModalOpen] = useState(false);
+export default function BoardSection() {
+  const [profile, setProfile] = useState<any>(null);
 
-  useEffect(() => {
-    fetch("/api/board-members")
-      .then((response) => response.json())
-      .then((data) => setMembers(data))
-      .catch((error) => console.error(error));
-  }, []);
+  async function openProfile(id: number) {
+    try {
+      const response = await fetch(`/api/board-members/${id}`);
+
+      if (!response.ok) {
+        throw new Error("Unable to load biography.");
+      }
+
+      const data = await response.json();
+
+      setProfile(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
-    <section style={{ padding: "60px" }}>
-      <h2 style={{ textAlign: "center" }}>Board of Directors</h2> 
+    <section className="board-section">
 
-      <section className="board-section">
+      <h2>Board of Directors</h2>
 
-  <div className="board-header">
+      <div className="board-grid">
 
-    <span>OUR EXPERTS</span>
-
-    <h2>WE ARE FRIENDLY & PROFESSIONAL</h2>
-
-    <p>
-      BitfuryTech Investment was founded in 2017 by a group of
-      skilled financial analysts, fund managers, and research
-      scientists with the mission of delivering disciplined
-      investment strategies while managing risk responsibly.
-    </p>
-
-  </div>
-
-  <div className="board-grid">
-
-    <BoardCard />
-
-    <BoardCard />
-
-    <BoardCard />
-
-    <BoardCard />
-
-  </div>
-{selectedMember && (
-  <BoardModal
-    member={selectedMember}
-    isOpen={isModalOpen}
-    onClose={() => setIsModalOpen(false)}
-  />
-)}
-        
-</section>
- 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px,1fr))",
-          gap: "20px",
-          marginTop: "30px"
-        }}
-      >
         {members.map((member) => (
-          <div
+          <BoardCard
             key={member.id}
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: "12px",
-              padding: "20px",
-              textAlign: "center"
-            }}
-          >
-            <img
-              src={member.image}
-              alt={member.name}
-              width="150"
-              height="150"
-              style={{
-                borderRadius: "50%",
-                objectFit: "cover"
-              }}
-            />
-
-            <h3>{member.name}</h3>
-
-            <p>{member.position}</p>
-
-            <button
-           onClick={() => {
-           setSelectedMember(member);
-           setIsModalOpen(true);
-           }}
-        >
-           View Biography
-          </button>
-          </div>
+            member={member}
+            onViewProfile={openProfile}
+          />
         ))}
+
       </div>
+
+      {profile && (
+        <BoardProfileModal
+          profile={profile}
+          onClose={() => setProfile(null)}
+        />
+      )}
+
     </section>
   );
 }
-
-export default BoardSection;
