@@ -35,7 +35,6 @@ export default function BoardSection() {
       }
 
       const data = await response.json();
-
       setProfile(data);
     } catch (error) {
       console.error(error);
@@ -44,11 +43,9 @@ export default function BoardSection() {
 
   return (
     <section className="board-section">
-
       <h2>Board of Directors</h2>
 
       <div className="board-grid">
-
         {members.map((member) => (
           <BoardCard
             key={member.id}
@@ -56,16 +53,14 @@ export default function BoardSection() {
             onViewProfile={openProfile}
           />
         ))}
-
       </div>
 
       {profile && (
-        <BoardProfileModal
+        <Boardmodal
           profile={profile}
           onClose={() => setProfile(null)}
         />
       )}
-
     </section>
   );
 }
