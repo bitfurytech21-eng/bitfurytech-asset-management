@@ -1,7 +1,7 @@
 function App() {
   return (
-    <div>
-      <h1>BitfuryTech is Working!</h1>
+    <div style={{ padding: "40px", fontSize: "24px" }}>
+      BitfuryTech Frontend is Working!
     </div>
   );
 }
